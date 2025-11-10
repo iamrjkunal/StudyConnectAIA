@@ -20,7 +20,7 @@ const steps = [
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [step1Data, setStep1Data] = useState<{ linkedinUrl: string; currentCity: string } | null>(null);
-  const [step2Data, setStep2Data] = useState<{ targetDegree: string; targetCountry: string } | null>(null);
+  const [step2Data, setStep2Data] = useState<{ degreeType: string; stream: string; targetCountry: string } | null>(null);
   const [matches, setMatches] = useState<Alumni[]>([]);
   const [selectedAlumniId, setSelectedAlumniId] = useState<string | null>(null);
   const [generatedEmails, setGeneratedEmails] = useState<Record<string, { email: string; personalizations: string[] }>>({});
@@ -31,13 +31,15 @@ export default function Home() {
     setCurrentStep(2);
   };
 
-  const handleStep2Submit = (data: { targetDegree: string; targetCountry: string }) => {
+  const handleStep2Submit = (data: { degreeType: string; stream: string; targetCountry: string }) => {
     setStep2Data(data);
     
     // TODO: Remove mock functionality - will call backend API
     if (step1Data) {
+      // Combine degreeType and stream for matching (e.g., "MS in Data Science")
+      const fullDegree = `${data.degreeType.split(' ')[0]} in ${data.stream}`;
       const foundMatches = findMatchingAlumni(
-        data.targetDegree,
+        fullDegree,
         data.targetCountry,
         step1Data.currentCity
       );
@@ -57,10 +59,11 @@ export default function Home() {
 
     // TODO: Remove mock functionality - will call OpenAI API via backend
     setTimeout(() => {
+      const fullDegree = `${step2Data.degreeType.split(' ')[0]} in ${step2Data.stream}`;
       const { email, personalizations } = generateMockEmail(
         alumni.name,
         step1Data.currentCity,
-        step2Data.targetDegree,
+        fullDegree,
         alumni
       );
       setGeneratedEmails(prev => ({
@@ -176,7 +179,7 @@ export default function Home() {
                   </h2>
                 </div>
                 <p className="text-muted-foreground text-lg mt-2">
-                  Alumni who studied <strong className="text-foreground font-semibold">{step2Data?.targetDegree}</strong> in <strong className="text-foreground font-semibold">{step2Data?.targetCountry}</strong>
+                  Alumni who studied <strong className="text-foreground font-semibold">{step2Data && `${step2Data.degreeType.split(' ')[0]} in ${step2Data.stream}`}</strong> in <strong className="text-foreground font-semibold">{step2Data?.targetCountry}</strong>
                 </p>
               </div>
               <Button variant="outline" size="lg" onClick={handleStartOver} data-testid="button-start-over" className="hover-elevate">

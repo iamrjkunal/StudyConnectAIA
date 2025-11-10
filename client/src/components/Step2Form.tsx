@@ -19,10 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowRight, ArrowLeft, GraduationCap, Globe } from "lucide-react";
+import { ArrowRight, ArrowLeft, GraduationCap, Globe, BookOpen } from "lucide-react";
 
 const step2Schema = z.object({
-  targetDegree: z.string().min(2, { message: "Please enter your target degree" }),
+  degreeType: z.string().min(1, { message: "Please select a degree type" }),
+  stream: z.string().min(2, { message: "Please enter your specialization/stream" }),
   targetCountry: z.string().min(1, { message: "Please select a country" }),
 });
 
@@ -33,6 +34,17 @@ interface Step2FormProps {
   onBack: () => void;
   defaultValues?: Partial<Step2FormData>;
 }
+
+const degreeTypes = [
+  "MS (Master of Science)",
+  "MBA (Master of Business Administration)",
+  "PhD (Doctor of Philosophy)",
+  "MA (Master of Arts)",
+  "MEng (Master of Engineering)",
+  "LLM (Master of Laws)",
+  "MFA (Master of Fine Arts)",
+  "MPH (Master of Public Health)",
+];
 
 const popularCountries = [
   "Germany",
@@ -51,7 +63,8 @@ export default function Step2Form({ onSubmit, onBack, defaultValues }: Step2Form
   const form = useForm<Step2FormData>({
     resolver: zodResolver(step2Schema),
     defaultValues: {
-      targetDegree: defaultValues?.targetDegree || "",
+      degreeType: defaultValues?.degreeType || "",
+      stream: defaultValues?.stream || "",
       targetCountry: defaultValues?.targetCountry || "",
     },
   });
@@ -61,23 +74,54 @@ export default function Step2Form({ onSubmit, onBack, defaultValues }: Step2Form
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="targetDegree"
+          name="degreeType"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base font-semibold">Target Degree / Stream</FormLabel>
+              <FormLabel className="text-base font-semibold">Degree Type</FormLabel>
               <FormDescription className="text-base">
-                Enter the program you're planning to pursue
+                Select the type of degree you're planning to pursue
+              </FormDescription>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="h-12 text-base shadow-sm" data-testid="select-degree-type">
+                    <div className="flex items-center gap-3">
+                      <GraduationCap className="w-5 h-5 text-muted-foreground" />
+                      <SelectValue placeholder="Select degree type" />
+                    </div>
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {degreeTypes.map((degree) => (
+                    <SelectItem key={degree} value={degree} className="text-base">
+                      {degree}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="stream"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-base font-semibold">Specialization / Stream</FormLabel>
+              <FormDescription className="text-base">
+                Enter your field of study or specialization
               </FormDescription>
               <FormControl>
                 <div className="relative group">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors">
-                    <GraduationCap className="w-5 h-5 text-muted-foreground group-focus-within:text-primary" />
+                    <BookOpen className="w-5 h-5 text-muted-foreground group-focus-within:text-primary" />
                   </div>
                   <Input
                     {...field}
-                    placeholder="e.g., MS in Data Science, MBA, MS in Computer Science"
+                    placeholder="e.g., Data Science, Computer Science, Business Analytics"
                     className="pl-12 h-12 text-base shadow-sm transition-all focus:shadow-md"
-                    data-testid="input-target-degree"
+                    data-testid="input-stream"
                   />
                 </div>
               </FormControl>

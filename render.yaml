@@ -1,0 +1,28 @@
+services:
+  # Web Service (Python Backend + React Frontend)
+  - type: web
+    name: studyconnect-ai
+    env: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt && npm install && npm run build
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: studyconnect-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+
+databases:
+  # PostgreSQL Database (Free Tier)
+  - name: studyconnect-db
+    databaseName: studyconnect
+    user: studyconnect
+    region: oregon
+    plan: free
+

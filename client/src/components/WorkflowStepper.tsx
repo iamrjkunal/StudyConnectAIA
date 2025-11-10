@@ -14,7 +14,7 @@ interface WorkflowStepperProps {
 
 export default function WorkflowStepper({ currentStep, steps }: WorkflowStepperProps) {
   return (
-    <div className="w-full" data-testid="workflow-stepper">
+    <div className="w-full px-4" data-testid="workflow-stepper">
       <div className="flex items-center justify-between max-w-2xl mx-auto">
         {steps.map((step, index) => (
           <div key={step.number} className="flex items-center flex-1">
@@ -51,7 +51,7 @@ export default function WorkflowStepper({ currentStep, steps }: WorkflowStepperP
               </div>
             </div>
             {index < steps.length - 1 && (
-              <div className="relative flex-1 mx-4">
+              <div className="relative flex-1 mx-2 sm:mx-4">
                 <div className="h-0.5 bg-border" />
                 <div
                   className={cn(
