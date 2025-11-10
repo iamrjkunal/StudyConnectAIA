@@ -21,25 +21,25 @@ export default function WorkflowStepper({ currentStep, steps }: WorkflowStepperP
             <div className="flex flex-col items-center flex-1">
               <div
                 className={cn(
-                  "flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all",
+                  "flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 shadow-sm",
                   currentStep > step.number
-                    ? "bg-primary border-primary text-primary-foreground"
+                    ? "bg-primary border-primary text-primary-foreground shadow-primary/20"
                     : currentStep === step.number
-                    ? "border-primary bg-background text-primary"
+                    ? "border-primary bg-primary/5 text-primary ring-4 ring-primary/10"
                     : "border-border bg-background text-muted-foreground"
                 )}
                 data-testid={`step-indicator-${step.number}`}
               >
                 {currentStep > step.number ? (
-                  <Check className="w-5 h-5" />
+                  <Check className="w-6 h-6" />
                 ) : (
-                  <span className="text-sm font-semibold">{step.number}</span>
+                  <span className="text-base font-bold">{step.number}</span>
                 )}
               </div>
-              <div className="mt-2 text-center">
+              <div className="mt-3 text-center">
                 <p
                   className={cn(
-                    "text-sm font-medium",
+                    "text-sm font-semibold tracking-tight",
                     currentStep >= step.number ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
@@ -51,12 +51,18 @@ export default function WorkflowStepper({ currentStep, steps }: WorkflowStepperP
               </div>
             </div>
             {index < steps.length - 1 && (
-              <div
-                className={cn(
-                  "h-0.5 flex-1 mx-2 transition-all",
-                  currentStep > step.number ? "bg-primary" : "bg-border"
-                )}
-              />
+              <div className="relative flex-1 mx-4">
+                <div className="h-0.5 bg-border" />
+                <div
+                  className={cn(
+                    "absolute inset-0 h-0.5 transition-all duration-500",
+                    currentStep > step.number ? "bg-primary" : "bg-transparent"
+                  )}
+                  style={{
+                    width: currentStep > step.number ? "100%" : "0%",
+                  }}
+                />
+              </div>
             )}
           </div>
         ))}

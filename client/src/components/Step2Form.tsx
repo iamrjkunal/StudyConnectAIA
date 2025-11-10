@@ -58,23 +58,25 @@ export default function Step2Form({ onSubmit, onBack, defaultValues }: Step2Form
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="targetDegree"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base font-medium">Target Degree / Stream</FormLabel>
-              <FormDescription>
+              <FormLabel className="text-base font-semibold">Target Degree / Stream</FormLabel>
+              <FormDescription className="text-base">
                 Enter the program you're planning to pursue
               </FormDescription>
               <FormControl>
-                <div className="relative">
-                  <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors">
+                    <GraduationCap className="w-5 h-5 text-muted-foreground group-focus-within:text-primary" />
+                  </div>
                   <Input
                     {...field}
                     placeholder="e.g., MS in Data Science, MBA, MS in Computer Science"
-                    className="pl-10"
+                    className="pl-12 h-12 text-base shadow-sm transition-all focus:shadow-md"
                     data-testid="input-target-degree"
                   />
                 </div>
@@ -89,22 +91,22 @@ export default function Step2Form({ onSubmit, onBack, defaultValues }: Step2Form
           name="targetCountry"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base font-medium">Target Country</FormLabel>
-              <FormDescription>
+              <FormLabel className="text-base font-semibold">Target Country</FormLabel>
+              <FormDescription className="text-base">
                 Where do you want to study?
               </FormDescription>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger data-testid="select-target-country">
-                    <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-muted-foreground" />
+                  <SelectTrigger className="h-12 text-base shadow-sm" data-testid="select-target-country">
+                    <div className="flex items-center gap-3">
+                      <Globe className="w-5 h-5 text-muted-foreground" />
                       <SelectValue placeholder="Select a country" />
                     </div>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {popularCountries.map((country) => (
-                    <SelectItem key={country} value={country}>
+                    <SelectItem key={country} value={country} className="text-base">
                       {country}
                     </SelectItem>
                   ))}
@@ -115,21 +117,21 @@ export default function Step2Form({ onSubmit, onBack, defaultValues }: Step2Form
           )}
         />
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-4">
           <Button
             type="button"
             variant="outline"
             size="lg"
             onClick={onBack}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto h-12 text-base font-semibold hover-elevate"
             data-testid="button-back"
           >
-            <ArrowLeft className="mr-2 w-4 h-4" />
+            <ArrowLeft className="mr-2 w-5 h-5" />
             Back
           </Button>
-          <Button type="submit" size="lg" className="w-full sm:flex-1" data-testid="button-find-matches">
+          <Button type="submit" size="lg" className="w-full sm:flex-1 h-12 text-base font-semibold shadow-md hover:shadow-lg transition-all" data-testid="button-find-matches">
             Find My Matches
-            <ArrowRight className="ml-2 w-4 h-4" />
+            <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </form>
