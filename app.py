@@ -63,6 +63,7 @@ class Alumni(db.Model):
     )
     name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
+    country = db.Column(db.String(255), nullable=True)  # Country where studied
     university = db.Column(db.String(255), nullable=False)
     degree = db.Column(db.String(255), nullable=False)
     major = db.Column(db.String(255), nullable=False)
@@ -82,6 +83,7 @@ class Alumni(db.Model):
             "id": str(self.id),
             "name": self.name,
             "email": self.email,
+            "country": self.country,
             "university": self.university,
             "degree": self.degree,
             "major": self.major,
@@ -108,137 +110,142 @@ def seed_alumni_data():
     """Seed the database with random alumni data"""
     with app.app_context():
         # Check if data already exists
-        if Alumni.query.count() >= 15:
+        if Alumni.query.count() >= 50:
             print("Alumni data already seeded")
             return
 
         # Clear existing alumni data
         Alumni.query.delete()
 
-        # Sample data
+        # Sample data - Comprehensive list based on form inputs
         first_names = [
-            "John",
-            "Sarah",
-            "Michael",
-            "Emily",
-            "David",
-            "Jessica",
-            "James",
-            "Jennifer",
-            "Robert",
-            "Linda",
-            "William",
-            "Patricia",
-            "Richard",
-            "Elizabeth",
-            "Joseph",
-            "Maria",
-            "Thomas",
-            "Susan",
-            "Charles",
-            "Margaret",
+            "John", "Sarah", "Michael", "Emily", "David", "Jessica", "James", "Jennifer",
+            "Robert", "Linda", "William", "Patricia", "Richard", "Elizabeth", "Joseph",
+            "Maria", "Thomas", "Susan", "Charles", "Margaret", "Daniel", "Lisa",
+            "Matthew", "Nancy", "Christopher", "Karen", "Anthony", "Betty", "Mark", "Helen",
+            "Raj", "Priya", "Amit", "Anjali", "Vikram", "Neha", "Arjun", "Kavya",
+            "Hans", "Emma", "Pierre", "Sophie", "Liam", "Olivia", "Noah", "Ava",
+            "Lucas", "Mia", "Alexander", "Isabella"
         ]
+        
         last_names = [
-            "Smith",
-            "Johnson",
-            "Williams",
-            "Brown",
-            "Jones",
-            "Garcia",
-            "Miller",
-            "Davis",
-            "Rodriguez",
-            "Martinez",
-            "Hernandez",
-            "Lopez",
-            "Gonzalez",
-            "Wilson",
-            "Anderson",
-            "Thomas",
-            "Taylor",
-            "Moore",
-            "Jackson",
-            "Martin",
+            "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+            "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
+            "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White",
+            "Harris", "Clark", "Lewis", "Robinson", "Walker", "Hall", "Allen",
+            "Kumar", "Sharma", "Singh", "Patel", "Gupta", "Reddy", "Iyer", "Nair",
+            "Müller", "Schmidt", "Meyer", "Weber", "Dubois", "Martin", "Bernard", "Petit",
+            "Wong", "Chen", "Tan", "Lim"
         ]
 
-        universities = [
-            "Stanford University",
-            "MIT",
-            "Harvard University",
-            "UC Berkeley",
-            "Carnegie Mellon University",
-            "University of Michigan",
-            "Cornell University",
+        # Countries from the form
+        countries = [
+            "Germany", "United States", "United Kingdom", "Canada", "Australia",
+            "Netherlands", "Singapore", "Sweden", "Switzerland", "France"
         ]
+        
+        # Universities by country
+        universities_by_country = {
+            "United States": ["Stanford University", "MIT", "Harvard University", "UC Berkeley", 
+                            "Carnegie Mellon University", "University of Michigan", "Yale University", 
+                            "Princeton University", "Columbia University", "Cornell University"],
+            "United Kingdom": ["University of Oxford", "University of Cambridge", "Imperial College London",
+                             "London School of Economics", "University College London", "University of Edinburgh"],
+            "Canada": ["University of Toronto", "McGill University", "University of British Columbia",
+                      "University of Waterloo", "University of Alberta"],
+            "Germany": ["Technical University of Munich", "Ludwig Maximilian University", "Heidelberg University",
+                       "Humboldt University of Berlin", "RWTH Aachen University"],
+            "Australia": ["University of Melbourne", "Australian National University", "University of Sydney",
+                         "University of Queensland", "Monash University"],
+            "Netherlands": ["University of Amsterdam", "Delft University of Technology", "Utrecht University",
+                          "Leiden University", "Erasmus University Rotterdam"],
+            "Singapore": ["National University of Singapore", "Nanyang Technological University"],
+            "Sweden": ["Lund University", "Uppsala University", "KTH Royal Institute of Technology",
+                      "Stockholm University"],
+            "Switzerland": ["ETH Zurich", "University of Zurich", "EPFL", "University of Geneva"],
+            "France": ["Sorbonne University", "École Polytechnique", "Sciences Po", "HEC Paris"]
+        }
 
+        # All degree types from the form
         degrees = [
-            "Bachelor of Science",
-            "Master of Science",
-            "MBA",
-            "Bachelor of Arts",
-            "Master of Engineering",
+            "MS (Master of Science)",
+            "MBA (Master of Business Administration)",
+            "PhD (Doctor of Philosophy)",
+            "MA (Master of Arts)",
+            "MEng (Master of Engineering)",
+            "LLM (Master of Laws)",
+            "MFA (Master of Fine Arts)",
+            "MPH (Master of Public Health)"
         ]
 
+        # Expanded majors covering all fields from the form
         majors = [
-            "Computer Science",
-            "Electrical Engineering",
-            "Mechanical Engineering",
-            "Business Administration",
-            "Data Science",
-            "Software Engineering",
-            "Information Systems",
-            "Industrial Engineering",
+            "Data Science", "Computer Science", "Business Analytics",
+            "Electrical Engineering", "Mechanical Engineering", "Civil Engineering",
+            "Business Administration", "Finance", "Marketing", "Management",
+            "Software Engineering", "Information Systems", "Cybersecurity",
+            "Industrial Engineering", "Artificial Intelligence", "Machine Learning",
+            "Biomedical Engineering", "Chemical Engineering", "Aerospace Engineering",
+            "Public Health", "Healthcare Management", "Epidemiology",
+            "Law", "International Law", "Corporate Law",
+            "Fine Arts", "Graphic Design", "Visual Arts",
+            "Economics", "Political Science", "International Relations",
+            "Environmental Science", "Sustainability", "Urban Planning"
         ]
 
+        # Global companies
         companies = [
-            "Google",
-            "Microsoft",
-            "Apple",
-            "Amazon",
-            "Meta",
-            "Tesla",
-            "Netflix",
-            "IBM",
-            "Oracle",
-            "Salesforce",
-            "Adobe",
-            "Intel",
-            "NVIDIA",
+            # US Tech
+            "Google", "Microsoft", "Apple", "Amazon", "Meta", "Tesla", "Netflix",
+            "IBM", "Oracle", "Salesforce", "Adobe", "Intel", "NVIDIA", "Uber", "Airbnb",
+            # European
+            "SAP", "Siemens", "Spotify", "Booking.com", "Adidas", "BMW", "Volkswagen",
+            # Asian
+            "Tata Consultancy Services", "Infosys", "Wipro", "Grab", "Sea Group",
+            # Finance
+            "Goldman Sachs", "Morgan Stanley", "JPMorgan Chase", "Deutsche Bank",
+            # Consulting
+            "McKinsey & Company", "Boston Consulting Group", "Deloitte", "Accenture"
         ]
 
         positions = [
-            "Software Engineer",
-            "Senior Software Engineer",
-            "Data Scientist",
-            "Product Manager",
-            "Engineering Manager",
-            "Technical Lead",
-            "Principal Engineer",
-            "Director of Engineering",
-            "VP of Engineering",
+            "Software Engineer", "Senior Software Engineer", "Staff Software Engineer",
+            "Data Scientist", "Senior Data Scientist", "ML Engineer",
+            "Product Manager", "Senior Product Manager", "Group Product Manager",
+            "Engineering Manager", "Director of Engineering", "VP of Engineering",
+            "Technical Lead", "Principal Engineer", "Distinguished Engineer",
+            "Business Analyst", "Strategy Consultant", "Management Consultant",
+            "Data Analyst", "Business Intelligence Analyst", "Analytics Manager",
+            "Research Scientist", "Applied Scientist", "AI Researcher",
+            "UX Designer", "Product Designer", "Design Lead",
+            "Project Manager", "Program Manager", "Technical Program Manager"
         ]
 
         industries = [
-            "Technology",
-            "Software Development",
-            "Data Science",
-            "Cloud Computing",
-            "Artificial Intelligence",
-            "Machine Learning",
-            "Cybersecurity",
-            "Fintech",
+            "Technology", "Software Development", "Data Science", "Cloud Computing",
+            "Artificial Intelligence", "Machine Learning", "Cybersecurity", "Fintech",
+            "E-commerce", "Healthcare Technology", "EdTech", "Automotive",
+            "Consulting", "Finance", "Investment Banking", "Venture Capital",
+            "Biotechnology", "Pharmaceuticals", "Renewable Energy", "Sustainability"
         ]
 
-        locations = [
-            "San Francisco, CA",
-            "New York, NY",
-            "Seattle, WA",
-            "Austin, TX",
-            "Boston, MA",
-            "Los Angeles, CA",
-            "Chicago, IL",
-            "Denver, CO",
-        ]
+        # Locations by country (including Indian cities from the form)
+        locations_by_country = {
+            "United States": ["San Francisco, CA", "New York, NY", "Seattle, WA", "Austin, TX",
+                            "Boston, MA", "Los Angeles, CA", "Chicago, IL", "Denver, CO"],
+            "United Kingdom": ["London", "Manchester", "Edinburgh", "Cambridge", "Oxford"],
+            "Canada": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
+            "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt", "Stuttgart"],
+            "Australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
+            "Netherlands": ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
+            "Singapore": ["Singapore"],
+            "Sweden": ["Stockholm", "Gothenburg", "Malmö"],
+            "Switzerland": ["Zurich", "Geneva", "Basel", "Lausanne"],
+            "France": ["Paris", "Lyon", "Marseille", "Toulouse"]
+        }
+        
+        # Also add Indian cities as some alumni might be working in India
+        indian_cities = ["Mumbai", "Bangalore", "Delhi", "Hyderabad", "Pune", "Chennai"]
 
         interests_list = [
             "Machine Learning,AI,Deep Learning",
@@ -249,6 +256,13 @@ def seed_alumni_data():
             "Cybersecurity,Network Security,Encryption",
             "Product Management,Strategy,UX Design",
             "Entrepreneurship,Startups,Innovation",
+            "Finance,Investment Banking,Trading",
+            "Healthcare,Medical Research,Public Health",
+            "Sustainability,Climate Change,Green Energy",
+            "Legal Tech,Policy,Regulation",
+            "Design Thinking,User Research,Prototyping",
+            "Blockchain,Cryptocurrency,Web3",
+            "Quantum Computing,Advanced Physics",
         ]
 
         skills_list = [
@@ -260,6 +274,13 @@ def seed_alumni_data():
             "C++,System Design,Algorithms",
             "Product Strategy,Agile,Scrum",
             "Leadership,Team Management,Communication",
+            "Financial Modeling,Excel,Bloomberg",
+            "R,Statistics,Tableau,Power BI",
+            "Figma,Sketch,Adobe Creative Suite",
+            "Contract Law,Negotiation,Compliance",
+            "Clinical Research,Epidemiology,Biostatistics",
+            "Go,Rust,Scala,Kotlin",
+            "SAP,Oracle ERP,Salesforce",
         ]
 
         bios = [
@@ -271,6 +292,13 @@ def seed_alumni_data():
             "Committed to driving technical excellence and fostering collaboration.",
             "Specializing in AI/ML applications for business transformation.",
             "Building the future of cloud computing and distributed systems.",
+            "Passionate about sustainable development and environmental impact.",
+            "Expert in financial markets with a focus on quantitative analysis.",
+            "Dedicated to improving healthcare outcomes through technology.",
+            "Focused on legal innovation and regulatory compliance.",
+            "Creative problem solver with a passion for design and user experience.",
+            "Driving digital transformation in traditional industries.",
+            "Committed to advancing research in cutting-edge fields.",
         ]
 
         profile_images = [
@@ -282,20 +310,34 @@ def seed_alumni_data():
             "/attached_assets/generated_images/Female_mechanical_engineer_headshot_1e1b6368.png",
         ]
 
-        # Generate 15 random alumni
-        for i in range(15):
+        # Generate 50 random alumni with diverse combinations
+        for i in range(50):
             name = f"{random.choice(first_names)} {random.choice(last_names)}"
+            
+            # Randomly select a country
+            country = random.choice(countries)
+            
+            # Pick university and location from that country
+            university = random.choice(universities_by_country[country])
+            
+            # 70% chance alumni works in a major city, 30% chance in India
+            if random.random() < 0.7:
+                location = random.choice(locations_by_country[country])
+            else:
+                location = random.choice(indian_cities)
+            
             alumni = Alumni(
                 name=name,
                 email=f"{name.lower().replace(' ', '.')}@email.com",
-                university=random.choice(universities),
+                country=country,
+                university=university,
                 degree=random.choice(degrees),
                 major=random.choice(majors),
                 graduation_year=random.randint(2010, 2023),
                 current_company=random.choice(companies),
                 current_position=random.choice(positions),
                 industry=random.choice(industries),
-                location=random.choice(locations),
+                location=location,
                 linkedin_url=f"https://linkedin.com/in/{name.lower().replace(' ', '-')}",
                 bio=random.choice(bios),
                 interests=random.choice(interests_list),
@@ -305,7 +347,7 @@ def seed_alumni_data():
             db.session.add(alumni)
 
         db.session.commit()
-        print("Successfully seeded 15 alumni records")
+        print("Successfully seeded 50 alumni records with diverse combinations")
 
 
 # Seed data on startup
@@ -390,7 +432,10 @@ def match_alumni():
 
     Expected JSON body:
     {
+        "country": "United States",
+        "degree": "MS (Master of Science)",
         "major": "Computer Science",
+        "location": "Mumbai",
         "industry": "Technology",
         "interests": ["Machine Learning", "AI"],
         "limit": 3
@@ -402,8 +447,17 @@ def match_alumni():
     query = Alumni.query
 
     # Apply filters if provided
+    if data and "country" in data and data["country"]:
+        query = query.filter(Alumni.country.ilike(f"%{data['country']}%"))
+
+    if data and "degree" in data and data["degree"]:
+        query = query.filter(Alumni.degree.ilike(f"%{data['degree']}%"))
+
     if data and "major" in data and data["major"]:
         query = query.filter(Alumni.major.ilike(f"%{data['major']}%"))
+
+    if data and "location" in data and data["location"]:
+        query = query.filter(Alumni.location.ilike(f"%{data['location']}%"))
 
     if data and "industry" in data and data["industry"]:
         query = query.filter(Alumni.industry.ilike(f"%{data['industry']}%"))
