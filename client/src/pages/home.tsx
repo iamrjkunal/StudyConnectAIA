@@ -104,7 +104,7 @@ export default function Home() {
           <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent" data-testid="text-app-title">Study Abroad Connect</h1>
           <div className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed space-y-1">
             <p>Connect with alumni mentors who walked your path.</p>
-            <p>Get personalized guidance for your study abroad journey in under 3 clicks.</p>
+            <p className="text-[18px]">Get personalized guidance for your study abroad journey in under 3 clicks.</p>
           </div>
           
           {/* Trust Indicators */}
