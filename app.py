@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import String
 import os
 import uuid
 
@@ -15,17 +16,25 @@ database_url = os.environ.get('DATABASE_URL')
 if database_url and database_url.startswith('postgres://'):
     database_url = database_url.replace('postgres://', 'postgresql://', 1)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'postgresql://localhost/studyconnect'
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///local.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 db = SQLAlchemy(app)
 
+# Determine if we're using PostgreSQL or SQLite
+is_postgres = database_url and 'postgresql' in database_url
+
 # Models
 class User(db.Model):
     __tablename__ = 'users'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    # Use UUID for PostgreSQL, String for SQLite
+    id = db.Column(
+        UUID(as_uuid=True) if is_postgres else String(36),
+        primary_key=True,
+        default=lambda: str(uuid.uuid4()) if not is_postgres else uuid.uuid4()
+    )
     username = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     
