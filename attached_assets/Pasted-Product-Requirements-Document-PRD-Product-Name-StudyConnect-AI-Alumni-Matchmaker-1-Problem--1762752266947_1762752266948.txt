@@ -1,0 +1,69 @@
+Product Requirements Document (PRD)
+🎯 Product Name: StudyConnect — AI Alumni Matchmaker
+1. Problem Statement
+
+Study-abroad aspirants struggle to find relevant alumni mentors. Platforms like LinkedIn make discovery manual and impersonal. StudyConnect bridges this gap with an AI-powered, ethical matchmaking engine that identifies alumni who once had similar professional profiles — enabling personalized, paid mentorship connections.
+
+2. Goal
+
+To help students discover three most relevant alumni (same degree, country, and background) and generate a personalized outreach email for a mentorship call — in under 3 clicks.
+
+3. User Inputs
+
+LinkedIn Profile URL – parse education, skills, experience, interests.
+
+Intended Stream / Degree – e.g., MS in Data Science.
+
+Target Country – e.g., Germany.
+
+Current City – e.g., Mumbai.
+
+4. User Flow (≤ 3 Clicks)
+
+Step 1: Paste LinkedIn profile URL
+Step 2: Enter intended program + country
+Step 3: View top 3 matched alumni with contact options + auto-generated outreach email
+
+🎯 Goal: student reaches a potential alumnus within 3 interactions, <2 minutes.
+
+5. End-to-End Flow Diagram
+[User Input]
+   ↓
+[LinkedIn Parsing + Data Enrichment]
+   ↓
+[Filter Alumni by Stream & Country]
+   ↓
+[Similarity Matching Engine]
+   ↓
+[Top 3 Alumni Output + Contact Info]
+   ↓
+[AI Outreach Email Generator]
+
+6. Data Sources & APIs
+Source	Purpose
+LinkedIn Recruiter / Talent API	Extract student & alumni profile data
+People Data Labs / Apollo / Clearbit	Enrich skills, company, and contact info
+Crunchbase	Enrich org/industry details
+Twitter / X API	Identify alternate social links
+Email Validation APIs	Confirm ethical, public emails
+7. Matching Algorithm
+
+Hybrid model combining:
+
+Rule-based filters: Degree, stream, country (mandatory match).
+
+Vector similarity (NLP embeddings): Compare LinkedIn summaries, skills, industries.
+
+Weighted composite score:
+
+Skills (40%)
+
+Experience (25%)
+
+City (15%)
+
+Extracurriculars (10%)
+
+Education (10%)
+
+Top-3 ranked by similarity score.
