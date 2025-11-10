@@ -101,9 +101,7 @@ export default function Home() {
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary uppercase tracking-wide">AI-Powered Matching</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent" data-testid="text-app-title">
-            StudyConnect
-          </h1>
+          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent" data-testid="text-app-title">Study Abroad Connect</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Connect with alumni mentors who walked your path. Get personalized guidance for your study abroad journey in under 3 clicks.
           </p>
