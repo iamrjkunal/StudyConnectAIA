@@ -119,51 +119,197 @@ def seed_alumni_data():
 
         # Sample data - Comprehensive list based on form inputs
         first_names = [
-            "John", "Sarah", "Michael", "Emily", "David", "Jessica", "James", "Jennifer",
-            "Robert", "Linda", "William", "Patricia", "Richard", "Elizabeth", "Joseph",
-            "Maria", "Thomas", "Susan", "Charles", "Margaret", "Daniel", "Lisa",
-            "Matthew", "Nancy", "Christopher", "Karen", "Anthony", "Betty", "Mark", "Helen",
-            "Raj", "Priya", "Amit", "Anjali", "Vikram", "Neha", "Arjun", "Kavya",
-            "Hans", "Emma", "Pierre", "Sophie", "Liam", "Olivia", "Noah", "Ava",
-            "Lucas", "Mia", "Alexander", "Isabella"
+            "John",
+            "Sarah",
+            "Michael",
+            "Emily",
+            "David",
+            "Jessica",
+            "James",
+            "Jennifer",
+            "Robert",
+            "Linda",
+            "William",
+            "Patricia",
+            "Richard",
+            "Elizabeth",
+            "Joseph",
+            "Maria",
+            "Thomas",
+            "Susan",
+            "Charles",
+            "Margaret",
+            "Daniel",
+            "Lisa",
+            "Matthew",
+            "Nancy",
+            "Christopher",
+            "Karen",
+            "Anthony",
+            "Betty",
+            "Mark",
+            "Helen",
+            "Raj",
+            "Priya",
+            "Amit",
+            "Anjali",
+            "Vikram",
+            "Neha",
+            "Arjun",
+            "Kavya",
+            "Hans",
+            "Emma",
+            "Pierre",
+            "Sophie",
+            "Liam",
+            "Olivia",
+            "Noah",
+            "Ava",
+            "Lucas",
+            "Mia",
+            "Alexander",
+            "Isabella",
         ]
-        
+
         last_names = [
-            "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
-            "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
-            "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White",
-            "Harris", "Clark", "Lewis", "Robinson", "Walker", "Hall", "Allen",
-            "Kumar", "Sharma", "Singh", "Patel", "Gupta", "Reddy", "Iyer", "Nair",
-            "Müller", "Schmidt", "Meyer", "Weber", "Dubois", "Martin", "Bernard", "Petit",
-            "Wong", "Chen", "Tan", "Lim"
+            "Smith",
+            "Johnson",
+            "Williams",
+            "Brown",
+            "Jones",
+            "Garcia",
+            "Miller",
+            "Davis",
+            "Rodriguez",
+            "Martinez",
+            "Hernandez",
+            "Lopez",
+            "Gonzalez",
+            "Wilson",
+            "Anderson",
+            "Thomas",
+            "Taylor",
+            "Moore",
+            "Jackson",
+            "Martin",
+            "Lee",
+            "Thompson",
+            "White",
+            "Harris",
+            "Clark",
+            "Lewis",
+            "Robinson",
+            "Walker",
+            "Hall",
+            "Allen",
+            "Kumar",
+            "Sharma",
+            "Singh",
+            "Patel",
+            "Gupta",
+            "Reddy",
+            "Iyer",
+            "Nair",
+            "Müller",
+            "Schmidt",
+            "Meyer",
+            "Weber",
+            "Dubois",
+            "Martin",
+            "Bernard",
+            "Petit",
+            "Wong",
+            "Chen",
+            "Tan",
+            "Lim",
         ]
 
         # Countries from the form
         countries = [
-            "Germany", "United States", "United Kingdom", "Canada", "Australia",
-            "Netherlands", "Singapore", "Sweden", "Switzerland", "France"
+            "Germany",
+            "United States",
+            "United Kingdom",
+            "Canada",
+            "Australia",
+            "Netherlands",
+            "Singapore",
+            "Sweden",
+            "Switzerland",
+            "France",
         ]
-        
+
         # Universities by country
         universities_by_country = {
-            "United States": ["Stanford University", "MIT", "Harvard University", "UC Berkeley", 
-                            "Carnegie Mellon University", "University of Michigan", "Yale University", 
-                            "Princeton University", "Columbia University", "Cornell University"],
-            "United Kingdom": ["University of Oxford", "University of Cambridge", "Imperial College London",
-                             "London School of Economics", "University College London", "University of Edinburgh"],
-            "Canada": ["University of Toronto", "McGill University", "University of British Columbia",
-                      "University of Waterloo", "University of Alberta"],
-            "Germany": ["Technical University of Munich", "Ludwig Maximilian University", "Heidelberg University",
-                       "Humboldt University of Berlin", "RWTH Aachen University"],
-            "Australia": ["University of Melbourne", "Australian National University", "University of Sydney",
-                         "University of Queensland", "Monash University"],
-            "Netherlands": ["University of Amsterdam", "Delft University of Technology", "Utrecht University",
-                          "Leiden University", "Erasmus University Rotterdam"],
-            "Singapore": ["National University of Singapore", "Nanyang Technological University"],
-            "Sweden": ["Lund University", "Uppsala University", "KTH Royal Institute of Technology",
-                      "Stockholm University"],
-            "Switzerland": ["ETH Zurich", "University of Zurich", "EPFL", "University of Geneva"],
-            "France": ["Sorbonne University", "École Polytechnique", "Sciences Po", "HEC Paris"]
+            "United States": [
+                "Stanford University",
+                "MIT",
+                "Harvard University",
+                "UC Berkeley",
+                "Carnegie Mellon University",
+                "University of Michigan",
+                "Yale University",
+                "Princeton University",
+                "Columbia University",
+                "Cornell University",
+            ],
+            "United Kingdom": [
+                "University of Oxford",
+                "University of Cambridge",
+                "Imperial College London",
+                "London School of Economics",
+                "University College London",
+                "University of Edinburgh",
+            ],
+            "Canada": [
+                "University of Toronto",
+                "McGill University",
+                "University of British Columbia",
+                "University of Waterloo",
+                "University of Alberta",
+            ],
+            "Germany": [
+                "Technical University of Munich",
+                "Ludwig Maximilian University",
+                "Heidelberg University",
+                "Humboldt University of Berlin",
+                "RWTH Aachen University",
+            ],
+            "Australia": [
+                "University of Melbourne",
+                "Australian National University",
+                "University of Sydney",
+                "University of Queensland",
+                "Monash University",
+            ],
+            "Netherlands": [
+                "University of Amsterdam",
+                "Delft University of Technology",
+                "Utrecht University",
+                "Leiden University",
+                "Erasmus University Rotterdam",
+            ],
+            "Singapore": [
+                "National University of Singapore",
+                "Nanyang Technological University",
+            ],
+            "Sweden": [
+                "Lund University",
+                "Uppsala University",
+                "KTH Royal Institute of Technology",
+                "Stockholm University",
+            ],
+            "Switzerland": [
+                "ETH Zurich",
+                "University of Zurich",
+                "EPFL",
+                "University of Geneva",
+            ],
+            "France": [
+                "Sorbonne University",
+                "École Polytechnique",
+                "Sciences Po",
+                "HEC Paris",
+            ],
         }
 
         # All degree types from the form
@@ -175,65 +321,166 @@ def seed_alumni_data():
             "MEng (Master of Engineering)",
             "LLM (Master of Laws)",
             "MFA (Master of Fine Arts)",
-            "MPH (Master of Public Health)"
+            "MPH (Master of Public Health)",
         ]
 
         # Expanded majors covering all fields from the form
         majors = [
-            "Data Science", "Computer Science", "Business Analytics",
-            "Electrical Engineering", "Mechanical Engineering", "Civil Engineering",
-            "Business Administration", "Finance", "Marketing", "Management",
-            "Software Engineering", "Information Systems", "Cybersecurity",
-            "Industrial Engineering", "Artificial Intelligence", "Machine Learning",
-            "Biomedical Engineering", "Chemical Engineering", "Aerospace Engineering",
-            "Public Health", "Healthcare Management", "Epidemiology",
-            "Law", "International Law", "Corporate Law",
-            "Fine Arts", "Graphic Design", "Visual Arts",
-            "Economics", "Political Science", "International Relations",
-            "Environmental Science", "Sustainability", "Urban Planning"
+            "Data Science",
+            "Computer Science",
+            "Business Analytics",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Business Administration",
+            "Finance",
+            "Marketing",
+            "Management",
+            "Software Engineering",
+            "Information Systems",
+            "Cybersecurity",
+            "Industrial Engineering",
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Biomedical Engineering",
+            "Chemical Engineering",
+            "Aerospace Engineering",
+            "Public Health",
+            "Healthcare Management",
+            "Epidemiology",
+            "Law",
+            "International Law",
+            "Corporate Law",
+            "Fine Arts",
+            "Graphic Design",
+            "Visual Arts",
+            "Economics",
+            "Political Science",
+            "International Relations",
+            "Environmental Science",
+            "Sustainability",
+            "Urban Planning",
         ]
 
         # Global companies
         companies = [
             # US Tech
-            "Google", "Microsoft", "Apple", "Amazon", "Meta", "Tesla", "Netflix",
-            "IBM", "Oracle", "Salesforce", "Adobe", "Intel", "NVIDIA", "Uber", "Airbnb",
+            "Google",
+            "Microsoft",
+            "Apple",
+            "Amazon",
+            "Meta",
+            "Tesla",
+            "Netflix",
+            "IBM",
+            "Oracle",
+            "Salesforce",
+            "Adobe",
+            "Intel",
+            "NVIDIA",
+            "Uber",
+            "Airbnb",
             # European
-            "SAP", "Siemens", "Spotify", "Booking.com", "Adidas", "BMW", "Volkswagen",
+            "SAP",
+            "Siemens",
+            "Spotify",
+            "Booking.com",
+            "Adidas",
+            "BMW",
+            "Volkswagen",
             # Asian
-            "Tata Consultancy Services", "Infosys", "Wipro", "Grab", "Sea Group",
+            "Tata Consultancy Services",
+            "Infosys",
+            "Wipro",
+            "Grab",
+            "Sea Group",
             # Finance
-            "Goldman Sachs", "Morgan Stanley", "JPMorgan Chase", "Deutsche Bank",
+            "Goldman Sachs",
+            "Morgan Stanley",
+            "JPMorgan Chase",
+            "Deutsche Bank",
             # Consulting
-            "McKinsey & Company", "Boston Consulting Group", "Deloitte", "Accenture"
+            "McKinsey & Company",
+            "Boston Consulting Group",
+            "Deloitte",
+            "Accenture",
         ]
 
         positions = [
-            "Software Engineer", "Senior Software Engineer", "Staff Software Engineer",
-            "Data Scientist", "Senior Data Scientist", "ML Engineer",
-            "Product Manager", "Senior Product Manager", "Group Product Manager",
-            "Engineering Manager", "Director of Engineering", "VP of Engineering",
-            "Technical Lead", "Principal Engineer", "Distinguished Engineer",
-            "Business Analyst", "Strategy Consultant", "Management Consultant",
-            "Data Analyst", "Business Intelligence Analyst", "Analytics Manager",
-            "Research Scientist", "Applied Scientist", "AI Researcher",
-            "UX Designer", "Product Designer", "Design Lead",
-            "Project Manager", "Program Manager", "Technical Program Manager"
+            "Software Engineer",
+            "Senior Software Engineer",
+            "Staff Software Engineer",
+            "Data Scientist",
+            "Senior Data Scientist",
+            "ML Engineer",
+            "Product Manager",
+            "Senior Product Manager",
+            "Group Product Manager",
+            "Engineering Manager",
+            "Director of Engineering",
+            "VP of Engineering",
+            "Technical Lead",
+            "Principal Engineer",
+            "Distinguished Engineer",
+            "Business Analyst",
+            "Strategy Consultant",
+            "Management Consultant",
+            "Data Analyst",
+            "Business Intelligence Analyst",
+            "Analytics Manager",
+            "Research Scientist",
+            "Applied Scientist",
+            "AI Researcher",
+            "UX Designer",
+            "Product Designer",
+            "Design Lead",
+            "Project Manager",
+            "Program Manager",
+            "Technical Program Manager",
         ]
 
         industries = [
-            "Technology", "Software Development", "Data Science", "Cloud Computing",
-            "Artificial Intelligence", "Machine Learning", "Cybersecurity", "Fintech",
-            "E-commerce", "Healthcare Technology", "EdTech", "Automotive",
-            "Consulting", "Finance", "Investment Banking", "Venture Capital",
-            "Biotechnology", "Pharmaceuticals", "Renewable Energy", "Sustainability"
+            "Technology",
+            "Software Development",
+            "Data Science",
+            "Cloud Computing",
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Cybersecurity",
+            "Fintech",
+            "E-commerce",
+            "Healthcare Technology",
+            "EdTech",
+            "Automotive",
+            "Consulting",
+            "Finance",
+            "Investment Banking",
+            "Venture Capital",
+            "Biotechnology",
+            "Pharmaceuticals",
+            "Renewable Energy",
+            "Sustainability",
         ]
 
         # Locations by country (including Indian cities from the form)
         locations_by_country = {
-            "United States": ["San Francisco, CA", "New York, NY", "Seattle, WA", "Austin, TX",
-                            "Boston, MA", "Los Angeles, CA", "Chicago, IL", "Denver, CO"],
-            "United Kingdom": ["London", "Manchester", "Edinburgh", "Cambridge", "Oxford"],
+            "United States": [
+                "San Francisco, CA",
+                "New York, NY",
+                "Seattle, WA",
+                "Austin, TX",
+                "Boston, MA",
+                "Los Angeles, CA",
+                "Chicago, IL",
+                "Denver, CO",
+            ],
+            "United Kingdom": [
+                "London",
+                "Manchester",
+                "Edinburgh",
+                "Cambridge",
+                "Oxford",
+            ],
             "Canada": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
             "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt", "Stuttgart"],
             "Australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
@@ -241,9 +488,9 @@ def seed_alumni_data():
             "Singapore": ["Singapore"],
             "Sweden": ["Stockholm", "Gothenburg", "Malmö"],
             "Switzerland": ["Zurich", "Geneva", "Basel", "Lausanne"],
-            "France": ["Paris", "Lyon", "Marseille", "Toulouse"]
+            "France": ["Paris", "Lyon", "Marseille", "Toulouse"],
         }
-        
+
         # Also add Indian cities as some alumni might be working in India
         indian_cities = ["Mumbai", "Bangalore", "Delhi", "Hyderabad", "Pune", "Chennai"]
 
@@ -313,19 +560,19 @@ def seed_alumni_data():
         # Generate 50 random alumni with diverse combinations
         for i in range(50):
             name = f"{random.choice(first_names)} {random.choice(last_names)}"
-            
+
             # Randomly select a country
             country = random.choice(countries)
-            
+
             # Pick university and location from that country
             university = random.choice(universities_by_country[country])
-            
+
             # 70% chance alumni works in a major city, 30% chance in India
             if random.random() < 0.7:
                 location = random.choice(locations_by_country[country])
             else:
                 location = random.choice(indian_cities)
-            
+
             alumni = Alumni(
                 name=name,
                 email=f"{name.lower().replace(' ', '.')}@email.com",
