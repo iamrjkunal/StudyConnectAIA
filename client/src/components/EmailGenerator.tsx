@@ -71,7 +71,7 @@ export default function EmailGenerator({
               </div>
               <div className="flex flex-wrap gap-2">
                 {personalizations.map((item, index) => (
-                  <Badge key={index} variant="outline" className="text-xs font-medium px-3 py-1 bg-accent/30 border-accent/40">
+                  <Badge key={index} variant="outline" className="text-xs font-medium px-3 py-1 bg-accent/30 border-accent/40 break-words max-w-full whitespace-normal text-left">
                     {item}
                   </Badge>
                 ))}
